@@ -1,0 +1,13 @@
+{
+  "name": "nodejs-client-certificate-auth",
+  "version": "0.0.1",
+  "description": "Testing authentication via client certificate",
+  "author": "Julie Ng",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
