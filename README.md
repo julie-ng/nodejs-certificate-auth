@@ -8,20 +8,41 @@ as opposed to username and passwords. Based on the following tutorials:
 - [HTTPS Authorized Certs with Node.js](https://engineering.circle.com/https-authorized-certs-with-node-js-315e548354a2)  
 	Author: Anders Brownworth, Rethinking money @CirclePay | Co-taught the Blockchain class at MIT
 
-## Misc. Notes
+## Demo
 
-- [Let's Encrypt](https://letsencrypt.org/) is a "free, automated, and open" Certificate Authority
-- **PEM**: Privacy Enhanced Mail is a Base64 encoded DER certificate
+First install required dependencies with `npm install`. Then the demo works as follows:
 
-### OpenSSL commands
+### Start Server
 
-| Command | Documentation | Description |
-|:--|:--|:--|
-| `genrsa` | [Docs](https://www.openssl.org/docs/man1.0.2/apps/genrsa.html) |  Generates an RSA private key |
-| **`req`** | [Docs](https://www.openssl.org/docs/man1.0.2/apps/req.html) |  Primarily creates and processes certificate requests in PKCS#10 format. It can additionally create self signed certificates for use as root CAs for example. |
-| `x509` | [Docs](https://www.openssl.org/docs/man1.0.2/apps/x509.html) | The x509 command is a multi purpose certificate utility. It can be used to display certificate information, convert certificates to various forms, sign certificate requests like a "mini CA" or edit certificate trust settings. |
+```
+npm run server
+```
 
-[View all `openssl` commands &rarr;](https://www.openssl.org/docs/man1.0.2/apps/openssl.html)
+You can test this by opening [https://localhost:4433/](https://localhost:4433/) in your browser.
+
+## Test Valid Client (Alice)
+
+**Alice** has a valid certificate issued by server, so she can talk to the server:
+
+```
+$ npm run valid-client
+
+> node ./client/valid-app.js
+
+Hello Alice, your certificate was issued by localhost!
+```
+
+## Test Invalid Client (Bob)
+
+**Bob** has a self-issued certificate, which is rejected by the server:
+
+```
+$ npm run invalid-client
+
+> node ./client/invalid-app.js
+
+Sorry Bob, certificates from Bob are not welcome here.
+```
 
 ## Server Certificates
 
@@ -83,3 +104,17 @@ Bob creates own without our server key.
 $ openssl x509 -req -in bob_csr.pem -signkey bob_key.pem -out bob_cert.pem -days 365
 ```
 
+## Notes
+
+- [Let's Encrypt](https://letsencrypt.org/) is a "free, automated, and open" Certificate Authority
+- **PEM**: Privacy Enhanced Mail is a Base64 encoded DER certificate
+
+### OpenSSL commands
+
+| Command | Documentation | Description |
+|:--|:--|:--|
+| `genrsa` | [Docs](https://www.openssl.org/docs/man1.0.2/apps/genrsa.html) |  Generates an RSA private key |
+| **`req`** | [Docs](https://www.openssl.org/docs/man1.0.2/apps/req.html) |  Primarily creates and processes certificate requests in PKCS#10 format. It can additionally create self signed certificates for use as root CAs for example. |
+| `x509` | [Docs](https://www.openssl.org/docs/man1.0.2/apps/x509.html) | The x509 command is a multi purpose certificate utility. It can be used to display certificate information, convert certificates to various forms, sign certificate requests like a "mini CA" or edit certificate trust settings. |
+
+[View all `openssl` commands &rarr;](https://www.openssl.org/docs/man1.0.2/apps/openssl.html)
