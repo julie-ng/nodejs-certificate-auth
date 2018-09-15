@@ -2,10 +2,10 @@
 
 as opposed to username and passwords. Based on the following tutorials:
 
-- [Authentication using HTTPS client certificates](https://medium.com/@sevcsik/authentication-using-https-client-certificates-3c9d270e8326)
+- [Authentication using HTTPS client certificates](https://medium.com/@sevcsik/authentication-using-https-client-certificates-3c9d270e8326)  
 	Author: Andras Sevcsik-Zajácz, Web technology enthusiast
 
-- [HTTPS Authorized Certs with Node.js](https://engineering.circle.com/https-authorized-certs-with-node-js-315e548354a2)
+- [HTTPS Authorized Certs with Node.js](https://engineering.circle.com/https-authorized-certs-with-node-js-315e548354a2)  
 	Author: Anders Brownworth, Rethinking money @CirclePay | Co-taught the Blockchain class at MIT
 
 ## Misc. Notes
