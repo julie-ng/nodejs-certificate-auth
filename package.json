@@ -5,9 +5,12 @@
   "author": "Julie Ng",
   "main": "index.js",
   "scripts": {
-    "server": "node ./server/server.js"
+    "server": "node ./server/server.js",
+    "valid-client": "node ./client/valid-app.js",
+    "invalid-client": "node ./client/invalid-app.js"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "express": "^4.16.3"
   }
 }
