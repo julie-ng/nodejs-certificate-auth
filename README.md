@@ -10,7 +10,18 @@ as opposed to username and passwords. Based on the following tutorials:
 
 ## Misc. Notes
 
-- Use Let's Encrypt as a Certificate Authority
+- [Let's Encrypt](https://letsencrypt.org/) is a "free, automated, and open" Certificate Authority
+- **PEM**: Privacy Enhanced Mail is a Base64 encoded DER certificate
+
+### OpenSSL commands
+
+| Command | Documentation | Description |
+|:--|:--|:--|
+| `genrsa` | [Docs](https://www.openssl.org/docs/man1.0.2/apps/genrsa.html) |  Generates an RSA private key |
+| **`req`** | [Docs](https://www.openssl.org/docs/man1.0.2/apps/req.html) |  Primarily creates and processes certificate requests in PKCS#10 format. It can additionally create self signed certificates for use as root CAs for example. |
+| `x509` | [Docs](https://www.openssl.org/docs/man1.0.2/apps/x509.html) | The x509 command is a multi purpose certificate utility. It can be used to display certificate information, convert certificates to various forms, sign certificate requests like a "mini CA" or edit certificate trust settings. |
+
+[View all `openssl` commands &rarr;](https://www.openssl.org/docs/man1.0.2/apps/openssl.html)
 
 ## Server Certificates
 
@@ -23,7 +34,7 @@ $ openssl req -x509 -newkey rsa:4096 -keyout server_key.pem -out server_cert.pem
 
 This command shortens following _three_ commands:
 
-- `openssl genrsa`
+- `openssl genrsa` 
 - `openssl req`
 - `openssl x509`
 
