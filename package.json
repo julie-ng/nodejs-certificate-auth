@@ -5,7 +5,7 @@
   "author": "Julie Ng",
   "main": "index.js",
   "scripts": {
-    "start": "node ./index.js"
+    "server": "node ./server/server.js"
   },
   "dependencies": {
     "express": "^4.16.3"
