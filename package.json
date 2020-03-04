@@ -1,15 +1,19 @@
 {
   "name": "client-certificate-auth-demo",
-  "version": "0.0.1",
-  "description": "Testing authentication via client certificates",
+  "version": "0.1.0",
+  "description": "Demo authentication via client certificates",
   "author": "Julie Ng",
   "scripts": {
     "server": "node ./server/server.js",
     "valid-client": "node ./client/valid-app.js",
-    "invalid-client": "node ./client/invalid-app.js"
+    "invalid-client": "node ./client/invalid-app.js",
+    "release": "standard-version --sign"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "standard-version": "^7.1.0"
   }
 }
