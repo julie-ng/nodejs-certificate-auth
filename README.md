@@ -62,7 +62,7 @@ This command shortens following _three_ commands:
 which generates _two_ files:
 
 - `server_cert.pem`
-- `erver_key.pem`
+- `server_key.pem`
 
 ### Server
 
