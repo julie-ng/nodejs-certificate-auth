@@ -8,19 +8,21 @@ as opposed to username and passwords. Based on the following tutorials:
 - [HTTPS Authorized Certs with Node.js](https://engineering.circle.com/https-authorized-certs-with-node-js-315e548354a2)  
 	Author: Anders Brownworth, Rethinking money @CirclePay | Co-taught the Blockchain class at MIT
 
-## Demo
+# Demo: How to Use
 
 First install required dependencies with `npm install`. Then the demo works as follows:
 
-### Start Server
+## Step 1 - Start Server
+
+We start a sever that by default only accepts requests authenticated by client certificates
 
 ```
 npm run server
 ```
 
-You can test this by opening [https://localhost:4433/](https://localhost:4433/) in your browser.
+You can test this is working by opening [https://localhost:4433/](https://localhost:4433/) in your browser. 
 
-## Test Valid Client (Alice)
+## Step 2 - Test Valid Client (Alice)
 
 **Alice** has a valid certificate issued by server, so she can talk to the server:
 
@@ -32,7 +34,7 @@ $ npm run valid-client
 Hello Alice, your certificate was issued by localhost!
 ```
 
-## Test Invalid Client (Bob)
+## Step 3 - Test Invalid Client (Bob)
 
 **Bob** has a self-issued certificate, which is rejected by the server:
 
@@ -44,13 +46,23 @@ $ npm run invalid-client
 Sorry Bob, certificates from Bob are not welcome here.
 ```
 
+
+# Reference - Introduction to Creating Certificates
+
 ## Server Certificates
 
 - CN: localhost
 - O: Client Certificate Demo
 
-```
-$ openssl req -x509 -newkey rsa:4096 -keyout server_key.pem -out server_cert.pem -nodes -days 365 -subj "/CN=localhost/O=Client\ Certificate\ Demo"
+```bash
+openssl req \
+	-x509 \
+	-newkey rsa:4096 \
+	-keyout server/server_key.pem \
+	-out server/server_cert.pem \
+	-nodes \
+	-days 365 \
+	-subj "/CN=localhost/O=Client\ Certificate\ Demo"
 ```
 
 This command shortens following _three_ commands:
@@ -64,44 +76,65 @@ which generates _two_ files:
 - `server_cert.pem`
 - `server_key.pem`
 
-### Server
-
-Run `npm run server` and then open [https://localhost:4433/](https://localhost:4433/)
- in browser to view the server.
-
 ## Create Client Certificates
 
 For demo, two users are created:
 
-- Alice, who has a valid certificate
-- Bob, who creates own certificate
+- Alice, who has a valid certificate, signed by the server
+- Bob, who creates own certificate, self-signed
 
 
-### Create key and Certificate Signing Request (CSR)
-
-```
-$ openssl req -newkey rsa:4096 -keyout alice_key.pem -out alice_csr.pem -nodes -days 365 -subj "/CN=Alice"
-$ openssl req -newkey rsa:4096 -keyout bob_key.pem -out bob_csr.pem -nodes -days 365 -subj "/CN=Bob"
-```
-
-### Create Alice's Certificate
+### Create Alice's Certificate (server-signed and valid)
 
 We create a certificate for Alice.
 
-- sign alice's CSR...
-- with our server key via `-CA` flag...
+- sign alice's Certificate Signing Request (CSR)...
+- with our server key via `-CA server/server_cert.pem` and
+	`-CAkey server/server_key.pem` flags
 - and save results as certificate
 
-```
-$ openssl x509 -req -in alice_csr.pem -CA server_cert.pem -CAkey server_key.pem -out alice_cert.pem -set_serial 01 -days 365
+```bash
+# generate server-signed (valid) certifcate
+openssl req \
+	-newkey rsa:4096 \
+	-keyout client/alice_key.pem \
+	-out client/alice_csr.pem \
+	-nodes \
+	-days 365 \
+	-subj "/CN=Alice"
+
+# sign with server_cert.pem
+openssl x509 \
+	-req \
+	-in client/alice_csr.pem \
+	-CA server/server_cert.pem \
+	-CAkey server/server_key.pem \
+	-out client/alice_cert.pem \
+	-set_serial 01 \
+	-days 365
 ```
 
-### Create Bob's Certificate
+### Create Bob's Certificate (self-signed and invalid)
 
 Bob creates own without our server key.
 
-```
-$ openssl x509 -req -in bob_csr.pem -signkey bob_key.pem -out bob_cert.pem -days 365
+```bash
+# generate self-signed (invalid) certifcate
+openssl req \
+	-newkey rsa:4096 \
+	-keyout client/bob_key.pem \
+	-out client/bob_csr.pem \
+	-nodes \
+	-days 365 \
+	-subj "/CN=Bob"
+
+# sign with bob_csr.pem
+openssl x509 \
+	-req \
+	-in client/bob_csr.pem \
+	-signkey client/bob_key.pem \
+	-out client/bob_cert.pem \
+	-days 365
 ```
 
 ## Notes
