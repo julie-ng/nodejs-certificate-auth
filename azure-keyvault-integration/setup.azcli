@@ -1,0 +1,12 @@
+az ad sp create-for-rbac \
+	-n SP_NAME_OF_YOUR_CHOICE \
+	--skip-assignment
+
+az keyvault set-policy \
+	--name $AZURE_KEYVAULT_NAME \
+	--spn $AZURE_CLIENT_ID \
+	--secret-permissions \
+		get \
+		getissuers \
+		list \
+		listissuers

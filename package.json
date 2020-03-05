@@ -4,16 +4,22 @@
   "description": "Demo authentication via client certificates",
   "author": "Julie Ng",
   "scripts": {
+    "azure-client-dev": "nodemon -w azure-keyvault-integration --exec 'npm run azure-client'",
+    "azure-client": "node ./azure-keyvault-integration/client.js",
     "server": "node ./server/server.js",
     "valid-client": "node ./client/valid-app.js",
     "invalid-client": "node ./client/invalid-app.js",
     "release": "standard-version --sign"
   },
   "dependencies": {
+    "@azure/identity": "^1.0.2",
+    "@azure/keyvault-secrets": "^4.0.2",
     "axios": "^0.18.0",
     "express": "^4.16.3"
   },
   "devDependencies": {
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.2",
     "standard-version": "^7.1.0"
   }
 }
