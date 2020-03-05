@@ -16,29 +16,27 @@ const opts = {
 const app = express();
 
 app.get('/', (req, res) => {
-	res.send('<a href="/authenticate">Log in using client certificate</a>');
+	res.send('<p>You successfully accessed the protected content !</p>');
 });
 
-app.get('/authenticate', (req, res) => {
+app.use((req, res, next) => {
+	console.log('Authentication middleware triggered on %s', req.url)
 	const cert = req.socket.getPeerCertificate();
-
 	if (req.client.authorized) {
-		res.send(`Hello ${cert.subject.CN}, your certificate was issued by ${cert.issuer.CN}!`);
+                next()
+        } else if (cert.subject) {
+                res.status(403)
+                         .send(`Sorry ${cert.subject.CN}, certificates from ${cert.issuer.CN} are not welcome here.`);
+        } else {
+                res.status(401)
+                   .send(`Sorry, but you need to provide a client certificate to continue.`);
+        }
+})
 
-	} else if (cert.subject) {
-		res.status(403)
-			 .send(`Sorry ${cert.subject.CN}, certificates from ${cert.issuer.CN} are not welcome here.`);
 
-	} else {
-		res.status(401)
-		   .send(`Sorry, but you need to provide a client certificate to continue.`);
-	}
-});
+const server = https.createServer(opts, app)
 
-// listens on https
-https.createServer(opts, app).listen(4433);
-
-// this is only http
-// app.listen(3000, () => {
-// 	console.log('server online');
-// });
+server.listen(app.get('port'), app.get('host'), () => {
+	var baseUrl = `https://${app.get('host')}:${app.get('port')}`
+	console.log('Server listening at : %s', baseUrl)
+})
