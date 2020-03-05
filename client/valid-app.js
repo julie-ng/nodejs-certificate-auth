@@ -4,7 +4,7 @@ const agent = require('./agent');
 
 const serverUrl = 'https://localhost:3000/';
 let opts = {
-	httpsAgent: agent('alice');
+	httpsAgent: agent('alice')
 };
 
 const requestServer = async () => {

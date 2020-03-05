@@ -5,7 +5,7 @@ const agent = require('./agent');
 
 const serverUrl = 'https://localhost:3000/authenticate';
 let opts = {
-	httpsAgent: agent('bob');
+	httpsAgent: agent('bob')
 };
 
 const requestServer = async () => {
