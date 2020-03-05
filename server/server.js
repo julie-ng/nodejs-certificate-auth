@@ -1,3 +1,5 @@
+'use strict';
+
 const express = require('express');
 const fs = require('fs');
 const https = require('https');
@@ -13,17 +15,17 @@ const opts = {
 	]
 };
 
+const port = 3000;
+const host = 'localhost';
+
 const app = express();
 
-app.get('/', (req, res) => {
-	res.send('<p>You successfully accessed the protected content !</p>');
-});
-
 app.use((req, res, next) => {
-	console.log('Authentication middleware triggered on %s', req.url)
+	console.log('Authentication middleware triggered on %s', req.url);
 	const cert = req.socket.getPeerCertificate();
+	console.log(cert)
 	if (req.client.authorized) {
-                next()
+                next();
         } else if (cert.subject) {
                 res.status(403)
                          .send(`Sorry ${cert.subject.CN}, certificates from ${cert.issuer.CN} are not welcome here.`);
@@ -33,10 +35,14 @@ app.use((req, res, next) => {
         }
 })
 
+app.get('/', (req, res) => {
+        res.send('<p>You successfully accessed the protected content !</p>');
+});
 
-const server = https.createServer(opts, app)
 
-server.listen(app.get('port'), app.get('host'), () => {
-	var baseUrl = `https://${app.get('host')}:${app.get('port')}`
-	console.log('Server listening at : %s', baseUrl)
+const server = https.createServer(opts, app);
+
+server.listen(port, host, () => {
+	var baseUrl = `https://${host}:${port}`;
+	console.log('Server listening at : %s', baseUrl);
 })

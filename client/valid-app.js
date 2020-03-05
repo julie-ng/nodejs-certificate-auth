@@ -1,13 +1,23 @@
 const axios = require('axios');
 const agent = require('./agent');
 
-const serverUrl = 'https://localhost:4433/authenticate';
-let opts = { httpsAgent: agent('alice') };
+const serverUrl = 'https://localhost:3000/';
+let opts = {
+	httpsAgent: agent('alice') 
+};
 
-axios.get(serverUrl, opts)
-	.then((res) => {
-		console.log(res.data);
-	})
-	.catch((err) => {
-		console.error(err.response.data);
-	});
+const requestServer = async () => {
+        try {
+                const res = await axios.get(serverUrl, opts)
+                console.log(res.data)
+        } catch (err) {
+                if (err.response) {
+                        console.log(err.response.data)
+                }
+                else {
+                        console.log(err)
+                }
+        }
+}
+
+requestServer()
