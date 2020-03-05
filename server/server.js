@@ -5,6 +5,7 @@ const fs = require('fs');
 const https = require('https');
 const path = require('path');
 
+// define the ssl configuration of the server API
 const opts = {
 	key: fs.readFileSync(path.join(__dirname, 'server_key.pem')),
 	cert: fs.readFileSync(path.join(__dirname, 'server_cert.pem')),
@@ -15,11 +16,16 @@ const opts = {
 	]
 };
 
+// define the listening port and hostname
 const port = 3000;
 const host = 'localhost';
 
 const app = express();
 
+/** Define a middleware that will be tiggered for each route.
+ * It will check that the client has a correct certificate before proceeding  * to the route.
+ * If no certificate is given or if it is not authorized, then it will reject * with an error.
+ **/ 
 app.use((req, res, next) => {
 	console.log('Authentication middleware triggered on %s', req.url);
 	const cert = req.socket.getPeerCertificate();
@@ -35,13 +41,17 @@ app.use((req, res, next) => {
         }
 })
 
+/** Define the root route "/"
+ * This route can only be accessed by an authenticated client.
+ **/
 app.get('/', (req, res) => {
         res.send('<p>You successfully accessed the protected content !</p>');
 });
 
-
+// create a https server
 const server = https.createServer(opts, app);
 
+// start the server and listen to the given host and port
 server.listen(port, host, () => {
 	var baseUrl = `https://${host}:${port}`;
 	console.log('Server listening at : %s', baseUrl);
