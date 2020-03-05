@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/authenticate', (req, res) => {
-	const cert = req.connection.getPeerCertificate();
+	const cert = req.socket.getPeerCertificate();
 
 	if (req.client.authorized) {
 		res.send(`Hello ${cert.subject.CN}, your certificate was issued by ${cert.issuer.CN}!`);
