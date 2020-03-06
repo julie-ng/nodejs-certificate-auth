@@ -36,7 +36,15 @@ app.get('/authenticate', (req, res) => {
 });
 
 // listens on https
-https.createServer(opts, app).listen(4433);
+https.createServer(opts, app).listen(4433, () => {
+	const msg = `SERVER ONLINE at https://localhost:4433
+To see demo, run in a new session:
+
+  - \`npm run valid-cert\`
+  - \`npm run invalid-cert\`
+`
+	console.log(msg)
+});
 
 // this is only http
 // app.listen(3000, () => {

@@ -1,6 +1,15 @@
 # Client Certificate Authentication with Node.js
 
-as opposed to username and passwords. Based on the following tutorials:
+This is demo on how to do client authentication with certificates - as opposed to username and passwords with out of the box (OOTB) Node.js.
+
+This demo has a server with two clients:
+
+- "Alice" who has a server-signed trusted certificate
+- "Bob" who has an invalid self-signed certificate
+
+<img src="./diagram-certificates.svg" width="400" alt="Diagram">
+
+Based on the following tutorials:
 
 - [Authentication using HTTPS client certificates](https://medium.com/@sevcsik/authentication-using-https-client-certificates-3c9d270e8326)  
 	Author: Andras Sevcsik-Zajácz, Web technology enthusiast
