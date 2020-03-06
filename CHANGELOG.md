@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/julie-ng/nodejs-client-certificate-auth/compare/v0.2.0...v0.3.0) (2020-03-06)
+
+
+### Features
+
+* **azure:** add example using key vault certificates, as opposed to secrets ([74ec2e6](https://github.com/julie-ng/nodejs-client-certificate-auth/commit/74ec2e6f84279ddbdd9b2a5d3ebc32364164e094))
+* **server:** add message indicating startup ([ac7ec66](https://github.com/julie-ng/nodejs-client-certificate-auth/commit/ac7ec66a9fa66cb79dc689b67ee13862fac3ea92))
+
 ## [0.2.0](https://github.com/julie-ng/nodejs-client-certificate-auth/compare/v0.1.0...v0.2.0) (2020-03-05)
 
 
