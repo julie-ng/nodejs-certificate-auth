@@ -6,7 +6,8 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "azure-dev": "nodemon -w azure-keyvault-integration --exec 'npm run client-keyvault-secret'",
+    "azure-dev": "nodemon -w azure-keyvault-integration --exec 'npm run client-keyvault-cert'",
+    "client-keyvault-cert": "node ./azure-keyvault-integration/keyvault-cert.js",
     "client-keyvault-secret": "node ./azure-keyvault-integration/keyvault-secret.js",
     "server": "node ./server/server.js",
     "valid-client": "node ./client/valid-app.js",
@@ -15,6 +16,7 @@
   },
   "dependencies": {
     "@azure/identity": "^1.0.2",
+    "@azure/keyvault-certificates": "^4.0.0",
     "@azure/keyvault-secrets": "^4.0.2",
     "axios": "^0.18.0",
     "express": "^4.16.3"
