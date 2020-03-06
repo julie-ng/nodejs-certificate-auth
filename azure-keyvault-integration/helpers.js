@@ -7,15 +7,7 @@
  * which we need to format into certificate
  */
 
-function formatCert (str) {
-	return _formater(str, '-----BEGIN CERTIFICATE-----', '-----END CERTIFICATE-----')
-}
-
-function formatKey (str) {
-	return _formater(str, '-----BEGIN PRIVATE KEY-----', '-----END PRIVATE KEY-----')
-}
-
-function _formater (str, prefix, suffix) {
+function _formatter (str, prefix, suffix) {
 	const c = str.replace(prefix, '')
 		.replace(suffix, '')
 		.replace(' ', '')
@@ -27,6 +19,18 @@ function _formater (str, prefix, suffix) {
 }
 
 module.exports = {
-	formatCert: formatCert,
-	formatKey: formatKey
+	wrapCert: function (str) {
+		return _formatter(
+			str,
+			'-----BEGIN CERTIFICATE-----',
+			'-----END CERTIFICATE-----'
+		)
+	},
+	wrapKey: function (str) {
+		return _formatter(
+			str,
+			'-----BEGIN PRIVATE KEY-----',
+			'-----END PRIVATE KEY-----'
+		)
+	}
 }

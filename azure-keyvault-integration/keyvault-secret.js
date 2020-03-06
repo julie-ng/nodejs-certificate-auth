@@ -28,8 +28,8 @@ async function main() {
 	// For more `https.Agent` options, see here:
 	// https://nodejs.org/api/https.html#https_https_request_options_callback
 	const agent = https.Agent({
-		cert: helpers.formatCert(certificate.value),
-		key: helpers.formatKey(key.value),
+		cert: helpers.wrapCert(certificate.value),
+		key: helpers.wrapKey(key.value),
 		rejectUnauthorized: false
 	})
 

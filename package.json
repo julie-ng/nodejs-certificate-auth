@@ -6,8 +6,8 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "azure-client-dev": "nodemon -w azure-keyvault-integration --exec 'npm run azure-client'",
-    "azure-client": "node ./azure-keyvault-integration/client.js",
+    "azure-dev": "nodemon -w azure-keyvault-integration --exec 'npm run client-keyvault-secret'",
+    "client-keyvault-secret": "node ./azure-keyvault-integration/keyvault-secret.js",
     "server": "node ./server/server.js",
     "valid-client": "node ./client/valid-app.js",
     "invalid-client": "node ./client/invalid-app.js",
