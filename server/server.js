@@ -40,8 +40,8 @@ https.createServer(opts, app).listen(4433, () => {
 	const msg = `SERVER ONLINE at https://localhost:4433
 To see demo, run in a new session:
 
-  - \`npm run valid-cert\`
-  - \`npm run invalid-cert\`
+  - \`npm run valid-client\`
+  - \`npm run invalid-client\`
 `
 	console.log(msg)
 });
