@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.1](https://github.com/julie-ng/nodejs-certificate-auth/compare/v0.3.0...v0.3.1) (2020-03-15)
+
+
+### Bug Fixes
+
+* **server:** command typo ([d8b9a6f](https://github.com/julie-ng/nodejs-certificate-auth/commit/d8b9a6f0de8a35ffa21c6bace791f30796b76ed4))
+
 ## [0.3.0](https://github.com/julie-ng/nodejs-client-certificate-auth/compare/v0.2.0...v0.3.0) (2020-03-06)
 
 
