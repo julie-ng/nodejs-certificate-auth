@@ -1,6 +1,6 @@
-# Client Certificate Authentication with Node.js
+# Client Certificate Authentication (mTLS) with Node.js
 
-This is demo on how to do client authentication with certificates - as opposed to username and passwords with out of the box (OOTB) Node.js.
+This is demo on how to do client authentication with certificates, **mTLS or mutual TLS** - as opposed to username and passwords with out of the box (OOTB) Node.js.
 
 This demo has a server with two clients:
 
