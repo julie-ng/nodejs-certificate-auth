@@ -21,6 +21,7 @@ openssl req \
 
 # sign with server_cert.pem
 openssl x509 \
+	-sha256 \
 	-req \
 	-in client/alice_csr.pem \
 	-CA server/server_cert.pem \
@@ -40,6 +41,7 @@ openssl req \
 
 # sign with bob_csr.pem
 openssl x509 \
+	-sha256 \
 	-req \
 	-in client/bob_csr.pem \
 	-signkey client/bob_key.pem \
